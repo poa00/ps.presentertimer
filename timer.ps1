@@ -11,7 +11,7 @@ Add-Type -Assemblyname System.Windows.Forms
 $CONFIG_FILE_NAME = "timer_config.psd1"
 $DEFAULT_START_SECONDS = 300
 $DEFAULT_WARNING_SECONDS = 60
-$TIMER_WARNING_PROCENT = 20
+$TIMER_WARNING_PERCENT = 20
 
 function Format-Seconds([int]$totalSeconds) {
     $minutes = [math]::Floor($totalSeconds / 60)
@@ -31,7 +31,7 @@ function Get-ConfigParameters() {
     $config = Import-PowerShellDataFile -Path "$PSScriptRoot\$CONFIG_FILE_NAME"
     
     $startSeconds = $config.startTimeMinutes * 60 + $config.startTimeSeconds
-    $warningSeconds = [int]($startSeconds * $TIMER_WARNING_PROCENT / 100)
+    $warningSeconds = [int]($startSeconds * $TIMER_WARNING_PERCENT / 100)
 
     return @{
         startSeconds = $startSeconds; 
@@ -120,7 +120,7 @@ function Update-Timer () {
     # Time decrement on 1 second
     $TimerState.leftSeconds--
     $timeLabel.Text = Format-Seconds($TimerState.leftSeconds)
-    $form.Text = 'S - ÒÚÓÔ'
+    $form.Text = 'S - √±√≤√Æ√Ø'
 }
 
 function Show-Timer (){
@@ -145,7 +145,7 @@ function Show-Timer (){
             if ((0 .. 59 -contains $min ) -and (0 .. 59 -contains $sec)) {
                 $TimerState.startSeconds = $min * 60 + $sec
                 $TimerState.leftSeconds = $TimerState.startSeconds
-                $TimerState.warningSeconds = [int]($TimerState.startSeconds * $TIMER_WARNING_PROCENT / 100)
+                $TimerState.warningSeconds = [int]($TimerState.startSeconds * $TIMER_WARNING_PERCENT / 100)
                 $TimerState.status = 'stop'
                 $timeLabel.Text = Format-Seconds($TimerState.startSeconds)
                 $newTime.Visible = $false
@@ -168,7 +168,7 @@ function Show-Timer (){
             # Input new values for timer. Press Enter to accept.
             $TimerState.status = 'suspend'
             $form.BackColor = 'gray'
-            $form.Text = 'Enter - ‚‚Ó‰'
+            $form.Text = 'Enter - √¢√¢√Æ√§'
             $timeLabel.Visible = $false
             $newTime.Text = Format-Seconds($TimerState.startSeconds)
             $newTime.Visible = $True
